@@ -1,0 +1,5 @@
+export {default as TableHeader} from './TableHeader.vue'
+export {default as TableHeaderActions} from './TableHeaderActions.vue'
+export {default as TableRowsHeader} from './TableRowsHeader.vue'
+export {default as TableRows} from './TableRows.vue'
+export {default as TableFooter} from './TableFooter.vue'

@@ -1,0 +1,16 @@
+.login {
+ 
+    //  @media screen and (min-width:800px) and (max-width:1175px) {}
+     
+     @media screen and (max-width:1175px) {
+        height: 350px;
+        width: 300px;
+    }
+ 
+
+     @media screen and (min-width:1175px) {
+        height: 60vh;
+        width: 25vw;
+    }
+ 
+  }

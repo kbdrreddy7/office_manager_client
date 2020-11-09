@@ -1,0 +1,29 @@
+// It's highly recommended to change the default colors
+// to match your app's branding.
+
+$primary   : #027BE3;
+$secondary : #26A69A;
+$accent    : #9C27B0;
+
+$dark      : #1D1D1D;
+
+$positive  : rgb(35, 206, 75);
+$negative  : rgb(221, 9, 34);
+$info      : #31CCEC;
+$warning   : #F2C037;
+
+/* $breakpoint-xs:450px;
+$breakpoint-sm:2*$breakpoint-xs;
+$breakpoint-md:3*$breakpoint-xs;
+$breakpoint-lg:4*$breakpoint-xs;
+$breakpoint-xl:5*$breakpoint-xs;
+ */
+
+$breakpoint-xs:450px;
+$breakpoint-sm:650px;
+$breakpoint-md:950px;
+$breakpoint-lg:1150px;
+$breakpoint-xl:1450px;
+
+
+@import '~quasar-variables-styl'
