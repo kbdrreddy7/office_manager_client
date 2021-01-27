@@ -96,7 +96,7 @@ const routes = [
       /* 
         don't forget to keep the below list in global master also
        */
-      let paths=['users','profiles']
+      let paths=['user','profile']
 
 
       if(paths.includes(path))

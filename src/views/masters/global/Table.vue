@@ -252,7 +252,7 @@
                   <q-tooltip>View</q-tooltip>
              </q-btn>
 
-            <q-btn :disabled="!currentPageAccess.update" flat icon='fas fa-edit' color="blue" :size="'sm'" 
+            <q-btn :disabled="!currentPageAccess.edit" flat icon='fas fa-edit' color="blue" :size="'sm'" 
                 @click.exact="e=>$emit('edit-obj',props.row[idField],props.row)" >
                 <q-tooltip>Edit</q-tooltip>
              </q-btn>

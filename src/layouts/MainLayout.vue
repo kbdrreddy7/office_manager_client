@@ -119,7 +119,7 @@ export default {
       menus:
     [
               {
-                  "name": "Users","url": "users","icon": "Users",
+                  "name": "Users","url": "user","icon": "Users",
                   "tab": "Masters","tab_no": 0,"menu_no": 0,"_id":0
               },
               {
@@ -127,7 +127,7 @@ export default {
                   "tab": "Masters","tab_no": 0,"menu_no": 1,"_id":1
               },
               {
-                  "name": "Users","url": "users","icon": "Users",
+                  "name": "Users","url": "user","icon": "Users",
                   "tab": "Masters","tab_no": 0,"menu_no": 3,"_id":2
               },
             

@@ -110,7 +110,7 @@ export default {
   data () {
     return {
      
-      mode:"list",// create //edit // list // view // delete
+      mode:PAGE_MODES.list,
       filter:"",
       addingFilter:false,
       logical:true,
@@ -249,8 +249,8 @@ export default {
 
                     let value=this.query[field][operation]
 
-                    if(fieldDeatil.type==='FK')
-                         value=this.getRefTextFromFieldInfo({value,fieldInfo:fieldDeatil.pgdg_fieldvalue})
+                    if(fieldDeatil.type==='fk')
+                         value=this.getRefTextFromFieldInfo({value,fieldInfo:fieldDeatil.value})
 
                     if(fieldDeatil.type==='date')
                          value=this.formatDate(value,'date')
@@ -453,7 +453,7 @@ export default {
               {
                   // if filter is not there or ...if operation already exists( other than 'is')
                   if((!query[filterField.field]) || (!Array.isArray(query[filterField.field])) )                  
-                        this.$set(query,filterField.field,[]) //  query[filterField.pgdg_fieldname]=[]
+                        this.$set(query,filterField.field,[]) //  query[filterField.field]=[]
 
                         /* 
                             once we use $set -> then the nested obj becomes reactive (Vue keeps watching)
@@ -496,17 +496,18 @@ export default {
                           attributes:this.visibleColumns.join(','),
                           ...this.query
                           })
+          this.positive({message:"Data fetched successfully"})
+
         },
         handleFilterFieldChange(field){
 
           if(field.type==='FK_dep'){
-              field.type='FK'
+              field.type='fk'
           }
-          if(field.type==='datetime'){
+          if(field.type==='timestamp'){
               field.type='date'
           }
           this.filterField=field
-          console.log("--------------field",field)
 
 
         },
@@ -561,7 +562,7 @@ export default {
       async setUp(){
         try {
           
-          this.loading=true
+            this.loading=true
             
 
 

@@ -96,9 +96,6 @@ export default {
     data(){
       return({
         logo:require("../assets/logo.png"),
-        text:"",
-        name: null,
-        age: null,
         isPwd:true,
 
         accept: false,

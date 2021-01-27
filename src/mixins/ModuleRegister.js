@@ -6,7 +6,7 @@ export default{
            
             if(!this.$store._modules.root._children[path])
             {
-                this.$store.registerModule(path,globalModule)
+                this.$store.registerModule(path,globalModule) // dynamic module registration
                 this.$store.dispatch(path+"/setPath",path)
             }
         

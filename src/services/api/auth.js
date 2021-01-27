@@ -12,7 +12,7 @@ export const logout=()=>{
 
 export const isAuthorized=()=>{
   let exp=localStorage.getItem('exp') // expires at
-  return  exp&& Date.now()<=(1000* parseInt(exp) )
+  return  exp&& (Date.now()<=(1000* parseInt(exp) ))
 }
 
 export const getToken=()=>{

@@ -79,7 +79,7 @@ export const addBulk=(route,objArray)=>{
 
 export const getPageDesign=(route)=>{
 
-    return http.get("/page_designs/one/"+route)
+    return http.get("/page_design/one/"+route)
 
 }
 

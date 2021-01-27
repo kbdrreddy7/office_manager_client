@@ -17,7 +17,7 @@ const actions={
                 dispatch('handleToken',res.token)
     
                 let {data}=await pageAccessService.getCurrentUserPageAccess()
-                 commit(AUTH.SET_USER_ACCESS,data)
+                 commit(AUTH.SET_USER_ACCESS,data['page_accesses'])
                 return
             }
             return
@@ -39,7 +39,7 @@ const actions={
         if(authService.isAuthorized()){
             dispatch('handleToken',authService.getToken())
             let {data}=await pageAccessService.getCurrentUserPageAccess()
-            commit(AUTH.SET_USER_ACCESS,data)
+            commit(AUTH.SET_USER_ACCESS,data['page_accesses'])
         }
         else commit(AUTH.SET_USER,null)
     }

@@ -8,7 +8,7 @@ export const handlePageDesign=(fieldsArray)=>{
   
 
         let idField="_id"
-        let order;
+        let order='updated_at';
         let fkFields={}//[ user:'usr_id,usr_name' ]  path:fields
         let fkObjFields={}//[ hierarchy:'hi_objective,hi_activity,hi_subactivity' ]  path:fields
 
@@ -17,46 +17,34 @@ export const handlePageDesign=(fieldsArray)=>{
         let rules={}
 
         let controllingFields={}
-        /*  controllingFields are  to manage dependency fields
-
-        controllingFields:{
-            controllingFields:{
-                dependencyField1:dependencyValue1,
-                dependencyField2:dependencyValue2
-                }
-            } 
-        */
+      
 
         for(let ele of fieldsArray)
         {
 
-            let { field,label,type,value,table_seq, validations, dep_field}=ele
+            let { field,label,type,value,table_seq, validations,  control_field}=ele
 
                 rules[field]=validationsService.getRules(validations)
 
-                if(field==='updated_at')
-                   order=field
+              
 
                 //-----------------
-                if(dep_field)
+                if(control_field)
                 {
-                    let ctrlFields=dep_field.split(',')
-                     // profile:Developer,team:mVBRI... field:value
-                    for(let ctrlFieldDetails of ctrlFields)
-                    {
-                        let [ctrlField,ctrlValue]=ctrlFieldDetails.split(":")
-                        if(!controllingFields[ctrlField])
-                         controllingFields[ctrlField]={}
+                    let fieldControlers=control_field.split(';')
+            // profile:Developer,Admin;team:mVBRI,ASSA... field1:value1,value2;field2
 
-                        controllingFields[ctrlField][field]=ctrlValue
+                    for(let contoldFieldDetails of fieldControlers)
+                    {
+                        let [controlField,controlValues]=contoldFieldDetails.split(":")
+                        if(!controllingFields[controlField])
+                         controllingFields[controlField]={}
+
+                        controllingFields[controlField][field]=controlValues
                     }
                     
                 }
 
-
-
-          
-          
 
             let format;
 
@@ -66,7 +54,7 @@ export const handlePageDesign=(fieldsArray)=>{
                         format=(val)=>utilService.formatDate(val,'date')
                         break
                     }
-                    case type==="datetime":{
+                    case type==="timestamp":{
                         format=(val)=>utilService.formatDate(val)
                         break
                     }
@@ -78,8 +66,8 @@ export const handlePageDesign=(fieldsArray)=>{
                                  format=(val)=>val;
                                  break;
                              }
-                        let [path,fields]=value.split("->") // users->_id,name
-                        fkFields[path]=fields// fields
+                        let [path,fields]=value.split("->") // user->_id,name
+                        fkFields[path]=fields
 
                         format=(val)=>utilService.getRefText({data:store.state.ref[path],
                                      val,fields:fields.split(',')}) || val;
@@ -115,7 +103,7 @@ export const handlePageDesign=(fieldsArray)=>{
             }
 
             // here name means field name--> but in pageDesign name means pageDesignname
-            let column={...ele,name: field,label,field:field,sortable:true,align:'left',format}
+            let column={...ele,name: field,label,field,sortable:true,align:'left',format}
 
             columns.push(column)
 
@@ -124,15 +112,20 @@ export const handlePageDesign=(fieldsArray)=>{
 
 
         }
-
-        let idIndex=columns.findIndex(ele=>ele['name']===idField)
+        
         // if id column is not the first one--> swap it to first place
-        if(idIndex>0){
-            //swapping
-            let temp=columns[0]
-            columns[0]=columns[idIndex]
-            columns[idIndex]=temp
+        if(columns[0] && columns[0]['name']!==idField)
+        {
+            let idIndex=columns.findIndex(ele=>ele['name']===idField)
+            if(idIndex>0){
+                //swapping
+                let temp=columns[0]
+                columns[0]=columns[idIndex]
+                columns[idIndex]=temp
+            }
+
         }
+
 
        // tableViewFields=tableViewFields.sort((a,b)=>a.table_seq-b.table_seq)
 
